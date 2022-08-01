@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -98,7 +99,18 @@ public class CatalogTest {
   @Test
   public void testSortByVolume(){
     List<Television> tvs = new ArrayList<>(Catalog.getInventory());//NOTE rather than casting on the assignment aperator to create an IS-A relationship, we used the constructor of new ArrayList and passed the original Collection inside to create a new ArrayList with those values.
-    tvs.sort(null);//NOTE null here tells it to use the natural order in the list(works if the type of collection already has a comparator.)
+    //NOTE null below in sort tells it to use the natural order in the list(works if the type of collection already has a comparator.)
+    tvs.sort((tv1, tv2) -> {
+
+//        if(tv1.getVolume() > tv2.getVolume()){
+//          return -1;
+//        }else if(tv2.getVolume() < tv1.getVolume()){
+//          return 1;
+//        }else{
+//          return 0;
+//        }
+      return Integer.compare(tv1.getVolume(), tv2.getVolume());
+    });
     System.out.println(tvs);
   }
 }
