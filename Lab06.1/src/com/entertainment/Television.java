@@ -119,4 +119,20 @@ implements Comparable<Television> {
     }
     return result;
   }
+
+
+  private static class Tuner { //NOTE when you have a nested class and it doesn't need to see the fields of the enclosing class, make it static.
+    private int channel = 3;  // default channel for cable and satellite customers
+
+    public int getChannel() {
+      return this.channel;
+    }
+    public void setChannel(int channel) {
+      this.channel = channel;
+    }
+  }
+
+  public enum DisplayType { LCD, LED, OLED, PLASMA, CRT } //NOTE when you nest an enum class, its automatically static
+
+
 }
