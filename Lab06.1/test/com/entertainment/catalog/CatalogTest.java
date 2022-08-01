@@ -100,7 +100,7 @@ public class CatalogTest {
   public void testSortByVolume(){
     List<Television> tvs = new ArrayList<>(Catalog.getInventory());//NOTE rather than casting on the assignment aperator to create an IS-A relationship, we used the constructor of new ArrayList and passed the original Collection inside to create a new ArrayList with those values.
     //NOTE null below in sort tells it to use the natural order in the list(works if the type of collection already has a comparator.)
-    tvs.sort((tv1, tv2) -> Integer.compare(tv1.getVolume(), tv2.getVolume()));
+    tvs.sort(Comparator.comparingInt(Television::getVolume).reversed());//NOTE adding .reversed would flip the order
     System.out.println(tvs);
   }
 }
