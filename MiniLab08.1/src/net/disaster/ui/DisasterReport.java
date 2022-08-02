@@ -30,7 +30,7 @@ public class DisasterReport {
       }
     });
     
-    JButton button = new JButton("Do NOT Press Me");
+    JButton button = new JButton("Do NOT Press Me");//NOTE this is a local variable
     /*
      * Instance variables and methods, static variables and methods fully available to lambda.
      * Local variables also available to lambda, but must be final or "effectively final."

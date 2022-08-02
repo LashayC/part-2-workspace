@@ -17,6 +17,7 @@ import org.junit.runners.MethodSorters;
 /**
  * TODO: use an annotation(s) in this class to apply some control over the order of test execution.
  */
+@FixMethodOrder(MethodSorters.DEFAULT)//NOTE With the @FixMethodOrder annotation;  If you hover you'll see the parameters, without params it'll run in default order.
 public class MethodOrderTest {
   
   @Test

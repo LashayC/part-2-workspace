@@ -14,13 +14,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+//@Ignore
 public class TelevisionTest {
   
   /**
    * TODO: use a JUnit timeout mechanism to verify that this test completes within 2.5 seconds.
    * It should be marked as a failed test if it takes longer than that.
    */
-   @Test
+  @Ignore //NOTE this tells it to skip the test
+  @Test(timeout = 3000)//NOTE timeout here tells it to fail if it doesn't fin in a certain amt of time.
   public void connectToNetwork_completesWithinTimeout() {
     Television tv = new Television();
     tv.connectToNetwork();

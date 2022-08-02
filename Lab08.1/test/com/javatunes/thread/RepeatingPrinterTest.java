@@ -17,6 +17,9 @@ public class RepeatingPrinterTest {
     // TODO: initialize the 'printer' reference variable with a block lambda
     // hint: you can copy / paste the *contents* of RepeatingPrinter's run() method
     // note: change the sysout to show "block-lambda"
+
+
+
     Runnable printer =  () -> {
           while (true) {
             System.out.println("block-lambda");

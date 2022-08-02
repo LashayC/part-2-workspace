@@ -68,7 +68,7 @@ implements Comparable<Television> {
       try {
         for (int i = 0; i < spin; i++) {
           System.out.print(". ");
-          Thread.sleep(delay / spin);
+          Thread.sleep(delay / spin); //TIP 500 ms
         }
         running = false;
         success = true;
