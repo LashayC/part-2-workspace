@@ -9,9 +9,13 @@
 package com.javatunes.catalog;
 
 import static org.junit.Assert.*;
+//import static java.util.stream.Collectors.*;
+//import static java.util.Comparator.*;
+
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,6 +56,17 @@ public class CatalogStreamTest {
   @Test
   public void testTitleEqualsArtistSortNaturalOrder() {
     // TODO
+   allMusicItems.stream()//NOTE If you just want to print, you need to remove List
+        .filter(item -> item.getTitle().equals(item.getArtist()))
+        .sorted()
+        .forEach(System.out::println);//NOTE an example of how you would terminate by printing
+
+//        .collect(Collectors.toList());
+
+//    assertEquals(2, items.size());
+//    assertEquals("Seal", items.get(0).getArtist());
+//    assertEquals("Ian Moore", items.get(1).getArtist());
+
   }
   
   /**
@@ -64,6 +79,23 @@ public class CatalogStreamTest {
   @Test
   public void testPriceLessThanSortMusicCategory() {
     // TODO
+    List<MusicItem> items = allMusicItems.stream()
+        .filter(item -> item.getPrice() < 12.00)
+        .sorted(Comparator.comparing(MusicItem::getMusicCategory))
+//        .sorted(Comparator. comparing(MusicItem::getMusicCategory, Comparator.comparing((MusicCategory::name)))) //NOTE this says sort by music category then by name
+        .collect(Collectors.toList());
+
+    System.out.println(items) ;
+    assertEquals(5, items.size());
+    assertEquals(Long.valueOf(7), items.get(0).getId());
+    assertEquals(Long.valueOf(13), items.get(1).getId());
+    assertEquals(Long.valueOf(16), items.get(2).getId());
+    assertEquals(Long.valueOf(17), items.get(3).getId());
+    assertEquals(Long.valueOf(18), items.get(4).getId());
+
+    //Assert values below 12
+//    assertFalse(items.contains(Long.valueOf(12));
+
   }
   
   /**
@@ -74,6 +106,19 @@ public class CatalogStreamTest {
   @Test
   public void testSortMusicCategorySortReleaseDateDesc() {
     // TODO
+    List<MusicItem> items = allMusicItems.stream()
+        .filter(((Predicate<MusicItem>) (item) -> item.getMusicCategory() == MusicCategory.ROCK).and((item) -> item.getPrice() < 15.0)) //NOTE here you're casting the predicate to it knows which type item is, then you can continue as norma..
+//        .filter(item -> item.getPrice() < 15.00 && item.getMusicCategory() == MusicCategory.ROCK) //Note you can use the == here because they're enums. This is the only object type this is safe on, otherwise its .equals
+//        .filter((item) -> item.getMusicCategory() == MusicCategory.ROCK)
+//        .filter((item) -> item.getPrice() <15.0)
+        .sorted(Comparator.comparing(MusicItem::getReleaseDate))
+        .collect(Collectors.toList());
+
+    System.out.printf("%s \n", items);
+
+    for(MusicItem item : items){
+      System.out.println(item);
+    }
   }
   
   /**
@@ -85,6 +130,11 @@ public class CatalogStreamTest {
   @Test
   public void testPriceGreaterThanSortPriceDescThenMusicCategory() {
     // TODO
+    List<MusicItem> items = allMusicItems.stream()
+        .filter(item -> item.getPrice() > 17.00)
+        .sorted(Comparator.comparing((MusicItem item) -> item.getPrice()).reversed().thenComparing(MusicItem::getArtist))//NOTE here when writing an expression lambda (method reference) include the type so the compiler knows what the parameter Type is.
+        .collect(Collectors.toList());
+    System.out.println(items);
   }
   
   /**
@@ -96,5 +146,12 @@ public class CatalogStreamTest {
   @Test
   public void testReleaseDateSortArtist() {
     // TODO
+    List<MusicItem> items = allMusicItems.stream()
+        .filter((item) -> item.getPrice() < 12)
+        .filter((item) -> item.getReleaseDate().toString().startsWith("198"))
+        .sorted(Comparator.comparing(MusicItem::getArtist))
+        .collect(Collectors.toList());
+    System.out.println(items);
   }
+
 }

@@ -8,9 +8,12 @@
  */
 package com.javatunes.personnel;
 
+import com.fastjava.annotation.Fast;
+
 /**
  * TODO: all methods in this class should run 25% faster.
  */
+@Fast(boost = 0.25)
 public class Employee {
   
   /**
@@ -18,7 +21,8 @@ public class Employee {
    * OSHA regulations require extra logging about the performance improvement,
    * as well as a description of why we're using this technology from FastJava.com.
    */
-  public void work() {
+  @Fast(boost = 0.5)//( log = true, description = "We're using this because we weree told to.")
+  public void work() { //NOTE if you had to annotate parameters they would go inside the () just before the param it annotates.
     System.out.println("Employee working hard");
   }
   
