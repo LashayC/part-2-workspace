@@ -10,14 +10,14 @@ package com.javabank;
 public class Account {
   private String name;
   private int balance;
-  
+
   public Account(String name, int balance) {
     this.name = name;
     setBalance(balance);
   }
-  
+
   /*
-   * deposit() and withdraw() are purposely implemented to show us 
+   * deposit() and withdraw() are purposely implemented to show us
    * some of the problems that can arise in multithreading.
    */
   public synchronized void deposit(int amount) {
@@ -35,11 +35,17 @@ public class Account {
   public String getName() {
     return name;
   }
-  
+
   public synchronized int getBalance() {
     return balance;
   }
   public synchronized void setBalance(int balance) {
     this.balance = balance;
   }
+
+  public void transferTo(Account destination, int amount) {
+    withdraw(amount);
+    destination.deposit(amount);
+  }
+
 }

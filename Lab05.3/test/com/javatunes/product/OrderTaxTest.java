@@ -46,7 +46,7 @@ public class OrderTaxTest {
    *     - If you are injecting the TaxCalculator into the Order (option 2, perhaps from an OrderFactory), use that 
    *       factory to create the Orders.
    *     - If you're injecting the TaxCalculator from the client, do so here.
-   * 4. Verify that the order's tax is as expected.
+   *     4. Verify that the order's tax is as expected.
    * 
    * TEST NOTE: you can split the two orders per location into two test cases, if desired.
    */
